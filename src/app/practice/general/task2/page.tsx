@@ -139,7 +139,14 @@ export default function Task2Practice() {
         <div style={{ flex: '0 0 25%', borderRight: '1px solid var(--color-border)', padding: '1.5rem', background: 'rgba(0,0,0,0.1)' }}>
           <StructureGuide 
             title={t.structureGuide}
-            steps={guidance ? guidance.structuralSkeleton.map(s => ({ id: `p${s.paragraph}`, title: `Paragraph ${s.paragraph}`, description: s.focus, icon: '📝' })) : STRUCTURE_GUIDE_TASK2} 
+            steps={guidance ? guidance.structuralSkeleton.map((s, index) => {
+              let title = `Paragraph ${s.paragraph}`;
+              let icon = '📝';
+              if (index === 0) { title = 'Introduction'; icon = '🎯'; }
+              else if (index === guidance.structuralSkeleton.length - 1) { title = 'Conclusion'; icon = '🏁'; }
+              else { title = `Body Paragraph ${index}`; icon = '📝'; }
+              return { id: `p${s.paragraph}`, title, description: s.focus, icon };
+            }) : STRUCTURE_GUIDE_TASK2} 
             currentSectionId={currentSectionId} 
             completedSections={completedSections} 
           />
