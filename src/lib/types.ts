@@ -85,3 +85,11 @@ export interface EvaluationResponse {
   correctedSentences: CorrectedSentence[];
   overallSummary: string;
 }
+
+export interface GuidancePackage {
+  determinedTone: string;
+  letterPurpose: string;
+  structuralSkeleton: { paragraph: number; focus: string }[];
+  recommendedLinkers: { word: string; usage: string }[];
+  phraseBank: { phrase: string; context: string }[];
+}

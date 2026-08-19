@@ -2,15 +2,19 @@ import React from 'react';
 import { Lightbulb, Info, AlertTriangle } from 'lucide-react';
 import { DYNAMIC_TIPS } from '@/lib/practice-data';
 
+import { GuidancePackage } from '@/lib/types';
+
 interface DynamicTipsProps {
   taskType: 'task1' | 'task2';
   currentSectionId: string;
   essayType?: string; // For task 2 (opinion, causes, etc)
   wordCount: number;
   timeRemaining?: number; // In seconds
+  guidance?: GuidancePackage | null;
+  isLoadingGuidance?: boolean;
 }
 
-export function DynamicTips({ taskType, currentSectionId, essayType, wordCount, timeRemaining }: DynamicTipsProps) {
+export function DynamicTips({ taskType, currentSectionId, essayType, wordCount, timeRemaining, guidance, isLoadingGuidance }: DynamicTipsProps) {
   
   // Resolve which tips to show based on section
   let activeTips: string[] = [];
@@ -81,6 +85,55 @@ export function DynamicTips({ taskType, currentSectionId, essayType, wordCount, 
           </div>
         ))}
       </div>
+
+      {/* AI Guidance Package */}
+      {isLoadingGuidance && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '1rem', opacity: 0.5 }}>
+          <div style={{ height: '20px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', width: '60%' }} className="animate-pulse"></div>
+          <div style={{ height: '60px', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', width: '100%' }} className="animate-pulse"></div>
+        </div>
+      )}
+
+      {guidance && !isLoadingGuidance && (
+        <div className="animate-fade-in-up" style={{ marginTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          
+          <div style={{ background: 'rgba(167, 139, 250, 0.08)', padding: '1rem', borderRadius: 'var(--radius-md)', borderTop: '3px solid #a78bfa' }}>
+             <h4 style={{ color: '#a78bfa', fontSize: '0.85rem', textTransform: 'uppercase', fontWeight: 600, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+               <Info size={14} /> Tone & Purpose
+             </h4>
+             <p style={{ fontSize: '0.9rem', marginBottom: '0.4rem' }}><strong>Tone:</strong> {guidance.determinedTone}</p>
+             <p style={{ fontSize: '0.9rem' }}><strong>Type:</strong> {guidance.letterPurpose}</p>
+          </div>
+
+          <div>
+             <h4 style={{ color: 'var(--color-primary)', fontSize: '0.85rem', textTransform: 'uppercase', fontWeight: 600, marginBottom: '0.75rem' }}>
+               Phrase Bank
+             </h4>
+             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+               {guidance.phraseBank.map((pb, i) => (
+                 <div key={i} style={{ background: 'rgba(0,0,0,0.2)', padding: '0.75rem', borderRadius: 'var(--radius-sm)' }}>
+                   <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '0.25rem' }}>{pb.context}</div>
+                   <div style={{ fontSize: '0.9rem', color: 'var(--color-text)', fontStyle: 'italic' }}>"{pb.phrase}"</div>
+                 </div>
+               ))}
+             </div>
+          </div>
+
+          <div>
+             <h4 style={{ color: '#06b6d4', fontSize: '0.85rem', textTransform: 'uppercase', fontWeight: 600, marginBottom: '0.75rem' }}>
+               Recommended Linkers
+             </h4>
+             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+               {guidance.recommendedLinkers.map((linker, i) => (
+                 <div key={i} title={linker.usage} style={{ background: 'rgba(6, 182, 212, 0.1)', color: '#06b6d4', padding: '0.3rem 0.6rem', borderRadius: '9999px', fontSize: '0.8rem', fontWeight: 500 }}>
+                   {linker.word}
+                 </div>
+               ))}
+             </div>
+          </div>
+
+        </div>
+      )}
     </div>
   );
 }

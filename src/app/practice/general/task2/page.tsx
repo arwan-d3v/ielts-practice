@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { translations, Language } from '@/lib/i18n';
 import { STRUCTURE_GUIDE_TASK2, TASK2_PROMPTS } from '@/lib/practice-data';
+import { GuidancePackage } from '@/lib/types';
 import { getWordCount } from '@/lib/utils';
 import { ArrowLeft, RefreshCw, Send, ChevronDown } from 'lucide-react';
 import { StructureGuide } from '@/components/StructureGuide';
@@ -22,9 +23,36 @@ export default function Task2Practice() {
   const [essay, setEssay] = useState('');
   
   // Real-time tracking
-  const [currentSectionId, setCurrentSectionId] = useState('intro');
+  const [currentSectionId, setCurrentSectionId] = useState('p1');
   const [completedSections, setCompletedSections] = useState<string[]>([]);
   const wordCount = getWordCount(essay);
+
+  // AI Guidance
+  const [guidance, setGuidance] = useState<GuidancePackage | null>(null);
+  const [isGeneratingGuide, setIsGeneratingGuide] = useState(false);
+
+  useEffect(() => {
+    const fetchGuidance = async () => {
+      setIsGeneratingGuide(true);
+      setGuidance(null);
+      try {
+        const res = await fetch('/api/practice-guide', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt, taskType: 'task2' })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setGuidance(data);
+        }
+      } catch (e) {
+        console.error('Failed to fetch guidance', e);
+      } finally {
+        setIsGeneratingGuide(false);
+      }
+    };
+    fetchGuidance();
+  }, [prompt]);
 
   // Time tracking (40 mins = 2400 seconds)
   const [timeRemaining, setTimeRemaining] = useState(2400);
@@ -48,34 +76,20 @@ export default function Task2Practice() {
     const pCount = paragraphs.length;
     
     let newCompleted: string[] = [];
-    let current = 'intro';
+    let current = 'p1';
 
-    if (pCount === 0 || pCount === 1) {
-      current = 'intro';
-    } else if (pCount === 2) {
-      newCompleted = ['intro'];
-      current = 'body1';
-    } else if (pCount === 3) {
-      newCompleted = ['intro', 'body1'];
-      current = 'body2';
-    } else if (pCount === 4) {
-      newCompleted = ['intro', 'body1', 'body2'];
-      
-      const lastP = paragraphs[paragraphs.length - 1].toLowerCase();
-      if (lastP.includes('conclusion') || lastP.includes('conclude') || lastP.includes('to sum up')) {
-        current = 'conclusion';
-      } else {
-        current = 'body3';
-      }
-    } else if (pCount >= 5) {
-      newCompleted = ['intro', 'body1', 'body2', 'body3'];
-      current = 'conclusion';
-      newCompleted.push('conclusion');
+    if (pCount === 0) {
+      current = 'p1';
+    } else {
+      const maxP = guidance ? guidance.structuralSkeleton.length : 4;
+      const pIndex = Math.min(pCount + 1, maxP);
+      current = `p${pIndex}`;
+      for (let i = 1; i < pIndex; i++) newCompleted.push(`p${i}`);
     }
 
     setCurrentSectionId(current);
     setCompletedSections(newCompleted);
-  }, [essay]);
+  }, [essay, guidance]);
 
   const generatePrompt = () => {
     const arr = TASK2_PROMPTS[essayType];
@@ -125,7 +139,7 @@ export default function Task2Practice() {
         <div style={{ flex: '0 0 25%', borderRight: '1px solid var(--color-border)', padding: '1.5rem', background: 'rgba(0,0,0,0.1)' }}>
           <StructureGuide 
             title={t.structureGuide}
-            steps={STRUCTURE_GUIDE_TASK2} 
+            steps={guidance ? guidance.structuralSkeleton.map(s => ({ id: `p${s.paragraph}`, title: `Paragraph ${s.paragraph}`, description: s.focus, icon: '📝' })) : STRUCTURE_GUIDE_TASK2} 
             currentSectionId={currentSectionId} 
             completedSections={completedSections} 
           />
@@ -185,6 +199,8 @@ export default function Task2Practice() {
             essayType={essayType}
             wordCount={wordCount}
             timeRemaining={timeRemaining}
+            guidance={guidance}
+            isLoadingGuidance={isGeneratingGuide}
           />
         </div>
 

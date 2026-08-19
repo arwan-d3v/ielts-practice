@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { translations, Language } from '@/lib/i18n';
 import { STRUCTURE_GUIDE_TASK1, TASK1_PROMPTS } from '@/lib/practice-data';
+import { GuidancePackage } from '@/lib/types';
 import { getWordCount } from '@/lib/utils';
 import { ArrowLeft, RefreshCw, Send } from 'lucide-react';
 import { StructureGuide } from '@/components/StructureGuide';
@@ -19,9 +20,36 @@ export default function Task1Practice() {
   const [essay, setEssay] = useState('');
   
   // Real-time tracking
-  const [currentSectionId, setCurrentSectionId] = useState('greeting');
+  const [currentSectionId, setCurrentSectionId] = useState('p1');
   const [completedSections, setCompletedSections] = useState<string[]>([]);
   const wordCount = getWordCount(essay);
+
+  // AI Guidance
+  const [guidance, setGuidance] = useState<GuidancePackage | null>(null);
+  const [isGeneratingGuide, setIsGeneratingGuide] = useState(false);
+
+  useEffect(() => {
+    const fetchGuidance = async () => {
+      setIsGeneratingGuide(true);
+      setGuidance(null);
+      try {
+        const res = await fetch('/api/practice-guide', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt, taskType: 'task1' })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setGuidance(data);
+        }
+      } catch (e) {
+        console.error('Failed to fetch guidance', e);
+      } finally {
+        setIsGeneratingGuide(false);
+      }
+    };
+    fetchGuidance();
+  }, [prompt]);
 
   // Time tracking (20 mins = 1200 seconds)
   const [timeRemaining, setTimeRemaining] = useState(1200);
@@ -39,40 +67,25 @@ export default function Task1Practice() {
     return `${m}:${s < 10 ? '0' : ''}${s}`;
   };
 
-  // Very basic heuristic to detect which section the user is writing
   useEffect(() => {
     const lines = essay.split('\n').filter(line => line.trim().length > 0);
     const lineCount = lines.length;
     
     let newCompleted: string[] = [];
-    let current = 'greeting';
+    let current = 'p1';
 
     if (lineCount === 0) {
-      current = 'greeting';
-    } else if (lineCount === 1) {
-      newCompleted = ['greeting'];
-      current = 'intro';
-    } else if (lineCount === 2) {
-      newCompleted = ['greeting', 'intro'];
-      current = 'body1';
-    } else if (lineCount === 3) {
-      newCompleted = ['greeting', 'intro', 'body1'];
-      current = 'body2';
-    } else if (lineCount >= 4) {
-      newCompleted = ['greeting', 'intro', 'body1', 'body2'];
-      current = 'closing';
-      
-      // If the last line looks like a sign-off
-      const lastLine = lines[lines.length - 1].toLowerCase();
-      if (lastLine.includes('yours') || lastLine.includes('regards') || lastLine.includes('best')) {
-        current = 'signoff';
-        newCompleted.push('closing');
-      }
+      current = 'p1';
+    } else {
+      const maxP = guidance ? guidance.structuralSkeleton.length : 5;
+      const pIndex = Math.min(lineCount + 1, maxP);
+      current = `p${pIndex}`;
+      for (let i = 1; i < pIndex; i++) newCompleted.push(`p${i}`);
     }
 
     setCurrentSectionId(current);
     setCompletedSections(newCompleted);
-  }, [essay]);
+  }, [essay, guidance]);
 
   const generatePrompt = () => {
     const random = TASK1_PROMPTS[Math.floor(Math.random() * TASK1_PROMPTS.length)];
@@ -116,7 +129,7 @@ export default function Task1Practice() {
         <div style={{ flex: '0 0 25%', borderRight: '1px solid var(--color-border)', padding: '1.5rem', background: 'rgba(0,0,0,0.1)' }}>
           <StructureGuide 
             title={t.structureGuide}
-            steps={STRUCTURE_GUIDE_TASK1} 
+            steps={guidance ? guidance.structuralSkeleton.map(s => ({ id: `p${s.paragraph}`, title: `Paragraph ${s.paragraph}`, description: s.focus, icon: '📝' })) : STRUCTURE_GUIDE_TASK1} 
             currentSectionId={currentSectionId} 
             completedSections={completedSections} 
           />
@@ -162,6 +175,8 @@ export default function Task1Practice() {
             currentSectionId={currentSectionId}
             wordCount={wordCount}
             timeRemaining={timeRemaining}
+            guidance={guidance}
+            isLoadingGuidance={isGeneratingGuide}
           />
         </div>
 
