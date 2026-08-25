@@ -35,6 +35,8 @@ body {
   color: var(--color-text);
   font-family: var(--font-inter), sans-serif;
   min-height: 100vh;
+  max-width: 100vw;
+  overflow-x: hidden;
   background-image: 
     radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
     radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.15) 0px, transparent 50%);
@@ -314,3 +316,66 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(148, 163, 184, 0.35);
 }
+
+
+/* -- PWA & Responsive Utilities ------------------- */
+.responsive-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.responsive-header {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-bg-card);
+  flex-shrink: 0;
+}
+
+.sidebar-panel {
+  flex: 0 0 280px;
+  overflow-y: auto;
+}
+
+.main-panel {
+  flex: 1 1 0;
+  overflow-y: auto;
+}
+
+.right-panel {
+  flex: 0 0 350px;
+  overflow-y: auto;
+}
+
+@media (max-width: 992px) {
+  .responsive-layout {
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .sidebar-panel, .main-panel, .right-panel {
+    flex: none !important;
+    width: 100% !important;
+    border-right: none !important;
+    border-left: none !important;
+    border-bottom: 1px solid var(--color-border) !important;
+    overflow-y: visible !important;
+    padding: 1rem !important;
+  }
+  .responsive-header {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .responsive-header > div {
+    justify-content: space-between;
+  }
+  .responsive-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+

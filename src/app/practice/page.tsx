@@ -35,7 +35,7 @@ export default function PracticeHub() {
           <p style={{ fontSize: '1.1rem', color: 'var(--color-text-muted)', lineHeight: 1.6 }}>{t.practiceDesc}</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', width: '100%', maxWidth: '900px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', width: '100%', maxWidth: '1000px' }}>
           
           {/* Academic (Locked) */}
           <div className="glass-panel" style={{ position: 'relative', overflow: 'hidden', opacity: 0.7 }}>
@@ -79,6 +79,25 @@ export default function PracticeHub() {
                   <span style={{ fontSize: '1.25rem' }}>→</span>
                 </button>
               </Link>
+            </div>
+          </div>
+
+          {/* Speaking Practice (Locked) */}
+          <div className="glass-panel" style={{ position: 'relative', overflow: 'hidden', opacity: 0.7 }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.4)', backdropFilter: 'blur(4px)', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ background: 'rgba(0,0,0,0.6)', padding: '1rem 2rem', borderRadius: 'var(--radius-lg)', display: 'flex', alignItems: 'center', gap: '0.75rem', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <Lock size={20} color="var(--color-text-muted)" />
+                <span style={{ fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>{t.comingSoon}</span>
+              </div>
+            </div>
+            
+            <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem', filter: 'blur(2px)' }}>
+              <div style={{ padding: '0.75rem', background: 'rgba(148, 163, 184, 0.1)', borderRadius: 'var(--radius-md)', color: '#94a3b8', width: 'max-content' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+              </div>
+              <h2 style={{ fontSize: '1.5rem' }}>Speaking Practice</h2>
+              <p style={{ color: 'var(--color-text-muted)', marginBottom: '1rem' }}>Simulated IELTS speaking test with real-time AI examiner feedback.</p>
+              <button className="btn-clay-secondary" disabled>Start Practice</button>
             </div>
           </div>
 
