@@ -167,7 +167,7 @@ export default function StudyPlan() {
         </div>
       </header>
 
-      <div className="responsive-layout main-panel" style={{ padding: '2rem', gap: '2rem', overflow: 'visible' }}>
+      <div className="responsive-layout main-panel" style={{ padding: '2rem', gap: '2rem' }}>
         
         {/* Left Sidebar: Stats & AI */}
         <div className="sidebar-panel" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -242,7 +242,7 @@ export default function StudyPlan() {
         </div>
 
         {/* Right Area: Timeline */}
-        <div className="main-panel" style={{ maxWidth: '800px', overflow: 'visible' }}>
+        <div className="main-panel" style={{ maxWidth: '800px' }}>
           <div style={{ position: 'relative', paddingLeft: '1.5rem' }}>
             {/* Vertical timeline line */}
             <div style={{ position: 'absolute', left: 0, top: '20px', bottom: '20px', width: '2px', background: 'var(--color-border)' }}></div>
