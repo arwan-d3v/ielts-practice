@@ -201,7 +201,7 @@ export default function VocabularyBuilder() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             {allTopics.map(topic => {
               const isActive = activeTopic === topic.id;
-              const topicMasteredCount = topic.words.filter(w => masteredWords.includes(w.id)).length;
+              const topicMasteredCount = topic.words.filter((w: VocabWord) => masteredWords.includes(w.id)).length;
               
               return (
                 <button
@@ -262,7 +262,7 @@ export default function VocabularyBuilder() {
           {!flashcardMode ? (
             /* Grid View */
             <div className="responsive-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
-              {wordsToDisplay.map(word => {
+              {wordsToDisplay.map((word: VocabWord) => {
                 const isMastered = masteredWords.includes(word.id);
                 const isReview = reviewWords.includes(word.id);
                 
