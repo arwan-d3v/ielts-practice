@@ -135,7 +135,7 @@ export default function StudyPlan() {
   const progressPercent = Math.round((completedTotal / totalTasks) * 100) || 0;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
       {/* Header */}
       <header className="responsive-header">
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -167,7 +167,7 @@ export default function StudyPlan() {
         </div>
       </header>
 
-      <div className="responsive-layout main-panel" style={{ padding: '2rem', gap: '2rem' }}>
+      <div className="responsive-layout" style={{ padding: '2rem', gap: '2rem' }}>
         
         {/* Left Sidebar: Stats & AI */}
         <div className="sidebar-panel" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>

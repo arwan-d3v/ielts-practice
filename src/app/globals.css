@@ -331,7 +331,10 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--color-bg-card);
+  background: var(--color-bg);
+  position: sticky;
+  top: 0;
+  z-index: 50;
   flex-shrink: 0;
 }
 
