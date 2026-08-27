@@ -1,5 +1,5 @@
 import { VocabWord } from './vocab-data';
-import { Connector } from './toolkit-data';
+import { ConnectorItem } from './toolkit-data';
 import { GrammarRule } from './grammar-data';
 import { AnnotatedText } from './annotated-data';
 

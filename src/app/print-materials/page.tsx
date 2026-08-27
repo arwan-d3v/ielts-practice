@@ -38,7 +38,7 @@ export default function PrintMaterials() {
     setAiBank(getAIBank());
   }, []);
 
-  const handleGenerate = async (section: keyof AIBankStore) => {
+  const handleGenerate = async (section: keyof AIBankStore | 'annotated') => {
     if (section === 'history' || section === 'generationLog') return;
     setIsGenerating(section);
     try {
