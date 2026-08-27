@@ -31,7 +31,7 @@ export interface AIPhrase {
 
 export interface AIBankStore {
   vocabulary: VocabWord[];
-  connectors: Connector[];
+  connectors: ConnectorItem[];
   formulas: AIFormula[];
   phrases: AIPhrase[];
   grammar: GrammarRule[];
