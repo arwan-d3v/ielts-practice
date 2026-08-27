@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { PenTool, FileText, Edit3, BookOpen, Layers, Calendar, Book, Mic, Headphones, Lock } from 'lucide-react';
+import { PenTool, FileText, Edit3, BookOpen, Layers, Calendar, Book, Mic, Headphones, Lock, Printer, BrainCircuit } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -92,6 +92,39 @@ export default function Home() {
             <p style={{ color: 'var(--color-text-muted)', flex: 1, fontSize: '0.9rem' }}>Tackle full reading passages with a real-time timer. Use AI to generate endless unique tests.</p>
             <Link href="/reading" style={{ width: '100%' }}>
               <button className="btn-clay" style={{ width: '100%', textAlign: 'center', background: 'rgba(20, 184, 166, 0.1)', color: '#14b8a6' }}>Start Reading</button>
+            </Link>
+          </div>
+
+          <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'flex-start', textAlign: 'left', borderTop: '3px solid #8b5cf6' }}>
+            <div style={{ padding: '0.75rem', background: 'rgba(139, 92, 246, 0.1)', borderRadius: 'var(--radius-md)', color: '#a78bfa' }}>
+              <BrainCircuit size={24} />
+            </div>
+            <h2 style={{ fontSize: '1.5rem' }}>Grammar Builder</h2>
+            <p style={{ color: 'var(--color-text-muted)', flex: 1, fontSize: '0.9rem' }}>Master Band 7.0+ sentence structures with formula tips and interactive adaptive quizzes.</p>
+            <Link href="/grammar" style={{ width: '100%' }}>
+              <button className="btn-clay" style={{ width: '100%', textAlign: 'center', background: 'rgba(139, 92, 246, 0.1)', color: '#c4b5fd' }}>Start Grammar</button>
+            </Link>
+          </div>
+
+          <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'flex-start', textAlign: 'left', borderTop: '3px solid #14b8a6' }}>
+            <div style={{ padding: '0.75rem', background: 'rgba(20, 184, 166, 0.1)', borderRadius: 'var(--radius-md)', color: '#14b8a6' }}>
+              <BookOpen size={24} />
+            </div>
+            <h2 style={{ fontSize: '1.5rem' }}>Contextual Reading</h2>
+            <p style={{ color: 'var(--color-text-muted)', flex: 1, fontSize: '0.9rem' }}>Read AI-annotated IELTS essays. Hover over highlighted text to reveal grammar, vocab, and connector usage tips.</p>
+            <Link href="/contextual-reading" style={{ width: '100%' }}>
+              <button className="btn-clay" style={{ width: '100%', textAlign: 'center', background: 'rgba(20, 184, 166, 0.1)', color: '#5eead4' }}>Start Reading</button>
+            </Link>
+          </div>
+
+          <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'flex-start', textAlign: 'left', borderTop: '3px solid #f43f5e' }}>
+            <div style={{ padding: '0.75rem', background: 'rgba(244, 63, 94, 0.1)', borderRadius: 'var(--radius-md)', color: '#f43f5e' }}>
+              <Printer size={24} />
+            </div>
+            <h2 style={{ fontSize: '1.5rem' }}>Print Materials</h2>
+            <p style={{ color: 'var(--color-text-muted)', flex: 1, fontSize: '0.9rem' }}>Export all study materials to A4 PDF. Vocabulary, connectors, formulas, and study plan — ready for hardcopy.</p>
+            <Link href="/print-materials" style={{ width: '100%' }}>
+              <button className="btn-clay" style={{ width: '100%', textAlign: 'center', background: 'rgba(244, 63, 94, 0.1)', color: '#f43f5e' }}>Print / Export PDF</button>
             </Link>
           </div>
 

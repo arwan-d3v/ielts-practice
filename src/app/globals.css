@@ -382,3 +382,43 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* ── Global Print Rules ────────────────────────────────────── */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 18mm 15mm 22mm 15mm;
+  }
+
+  body {
+    background: white !important;
+    background-image: none !important;
+    color: #1a1a1a !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide navigation & interactive elements */
+  .responsive-header,
+  .sidebar-panel,
+  nav,
+  button:not(.planTaskCheckbox) {
+    /* These are hidden by more specific rules in print.module.css */
+  }
+
+  /* Ensure smooth page breaks */
+  h2, h3, h4 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  img, table, figure {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+}
+

@@ -1,0 +1,1046 @@
+/* ═══════════════════════════════════════════════════════════════
+   PRINT MATERIALS — A4 Print-Optimized Stylesheet
+   Designed for physical A4 paper (210mm × 297mm)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Screen Preview Mode ──────────────────────────────────── */
+.printContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+/* ── Controls Bar (hidden in print) ───────────────────────── */
+.controlsBar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.controlsLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.controlsRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.printBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.printBtnPrimary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.printBtnPrimary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.printBtnSecondary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.printBtnSecondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.sectionToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.sectionToggle:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.sectionToggleActive {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.backLink {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: var(--color-text);
+}
+
+/* ── Printable Content Area ───────────────────────────────── */
+.printArea {
+  padding: 2rem;
+  color: var(--color-text);
+}
+
+/* ── Cover Page ───────────────────────────────────────────── */
+.coverPage {
+  text-align: center;
+  padding: 4rem 2rem;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.coverTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #3b82f6, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.coverSubtitle {
+  font-size: 1.3rem;
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+}
+
+.coverMeta {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+/* ── Table of Contents ────────────────────────────────────── */
+.tocSection {
+  padding: 1.5rem 0;
+}
+
+.tocTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.tocList {
+  list-style: none;
+  padding: 0;
+}
+
+.tocItem {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px dotted rgba(148, 163, 184, 0.2);
+  font-size: 0.95rem;
+}
+
+.tocNumber {
+  font-weight: 700;
+  color: var(--color-primary);
+  min-width: 2rem;
+}
+
+.tocLabel {
+  flex: 1;
+}
+
+/* ── Section Headers ──────────────────────────────────────── */
+.sectionHeader {
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid var(--color-primary);
+}
+
+.sectionNumber {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-primary);
+  margin-bottom: 0.25rem;
+}
+
+.sectionTitle {
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+.sectionDescription {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+}
+
+/* ── Topic Group Header ───────────────────────────────────── */
+.topicHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border-left: 4px solid;
+}
+
+.topicIcon {
+  font-size: 1.5rem;
+}
+
+.topicName {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.topicCount {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-left: auto;
+}
+
+/* ── Vocabulary Word Card ─────────────────────────────────── */
+.wordCard {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  background: rgba(30, 41, 59, 0.4);
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.wordHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.wordName {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.wordBadge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badgePos {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(139, 92, 246, 0.15);
+  color: #a78bfa;
+}
+
+.badgeLevel {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.wordDefinition {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.defEn {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.defId {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.wordGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.wordField {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.fieldLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.fieldValue {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.exampleBox {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border-left: 3px solid;
+  margin-bottom: 0.5rem;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.exampleLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.2rem;
+}
+
+.exampleText {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.wordFullWidth {
+  grid-column: 1 / -1;
+}
+
+.tipBox {
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  margin-top: 0.5rem;
+}
+
+.tipLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-warning);
+  margin-bottom: 0.2rem;
+}
+
+.tipText {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.mistakeBox {
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  margin-top: 0.5rem;
+}
+
+.mistakeLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-danger);
+  margin-bottom: 0.2rem;
+}
+
+/* ── Connector Table ──────────────────────────────────────── */
+.connectorGroup {
+  margin-bottom: 2rem;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.connectorGroupHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  border-left: 4px solid;
+}
+
+.connectorGroupName {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.connectorGroupDesc {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-left: auto;
+}
+
+.connectorCard {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: rgba(30, 41, 59, 0.3);
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.connectorWord {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #60a5fa;
+}
+
+.connectorMeta {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.25rem 0 0.5rem;
+  flex-wrap: wrap;
+}
+
+.connectorUsage {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.suitabilityBadge {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.forWriting {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+}
+
+.forSpeaking {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+/* ── Formula Card ─────────────────────────────────────────── */
+.formulaCard {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  background: rgba(30, 41, 59, 0.4);
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.formulaName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.formulaCategory {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.formulaTemplate {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Phrase Bank ──────────────────────────────────────────── */
+.phraseCard {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: rgba(30, 41, 59, 0.3);
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.phraseText {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #60a5fa;
+  margin-bottom: 0.25rem;
+}
+
+.phraseMeaning {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+}
+
+.phraseContext {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border-left: 3px solid var(--color-primary);
+  background: rgba(0, 0, 0, 0.15);
+  font-style: italic;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.alternativesList {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.alternativeChip {
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(139, 92, 246, 0.1);
+  font-size: 0.78rem;
+  color: #a78bfa;
+}
+
+/* ── Study Plan Table ─────────────────────────────────────── */
+.planDayCard {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  background: rgba(30, 41, 59, 0.4);
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.planDayHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.planDayNumber {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.planDayTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.planDayTheme {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.planDayTime {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-left: auto;
+}
+
+.planTaskList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.planTask {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.4rem 0;
+  font-size: 0.88rem;
+}
+
+.planTaskTime {
+  min-width: 50px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.planTaskType {
+  display: inline-block;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  min-width: 52px;
+  text-align: center;
+}
+
+.planTaskActivity {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.planTaskCheckbox {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Page Break Helpers ───────────────────────────────────── */
+.pageBreakBefore {
+  page-break-before: always;
+  break-before: page;
+}
+
+.pageBreakAvoid {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   @MEDIA PRINT — A4 PAPER LAYOUT
+   Critical for proper multi-page pagination
+   ═══════════════════════════════════════════════════════════════ */
+@media print {
+  /* ── Page Setup ──────────────────────────────────────────── */
+  @page {
+    size: A4 portrait;
+    margin: 18mm 15mm 22mm 15mm; /* top right bottom left */
+  }
+
+  @page :first {
+    margin-top: 0;
+  }
+
+  /* ── Reset Dark Theme → White ────────────────────────────── */
+  :global(*) {
+    color: #1a1a1a !important;
+    background: white !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    -webkit-text-fill-color: #1a1a1a !important;
+  }
+
+  :global(html), :global(body), :global(main) {
+    background: white !important;
+    background-image: none !important;
+    font-size: 10.5pt !important;
+    line-height: 1.45 !important;
+    color: #1a1a1a !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    max-width: 100% !important;
+    display: block !important;
+    flex: none !important;
+    position: static !important;
+  }
+
+
+  /* ── Hide Non-Print Elements ─────────────────────────────── */
+  .controlsBar,
+  .backLink,
+  .printBtn,
+  .printBtnPrimary,
+  .printBtnSecondary,
+  .sectionToggle,
+  .sectionToggleActive,
+  :global(footer),
+  :global(#nprogress) {
+    display: none !important;
+  }
+
+  /* ── Container ───────────────────────────────────────────── */
+  .printContainer {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .printArea {
+    padding: 0 !important;
+  }
+
+  /* ── Cover Page ──────────────────────────────────────────── */
+  .coverPage {
+    min-height: auto !important;
+    padding: 40mm 0 20mm !important;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .coverTitle {
+    font-size: 28pt !important;
+    -webkit-text-fill-color: #1e40af !important;
+    color: #1e40af !important;
+  }
+
+  .coverSubtitle {
+    font-size: 14pt !important;
+    color: #475569 !important;
+    -webkit-text-fill-color: #475569 !important;
+  }
+
+  /* ── TOC ─────────────────────────────────────────────────── */
+  .tocSection {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .tocTitle {
+    font-size: 16pt !important;
+    border-bottom-color: #1e40af !important;
+  }
+
+  .tocItem {
+    border-bottom-color: #cbd5e1 !important;
+    font-size: 10.5pt !important;
+  }
+
+  .tocNumber {
+    color: #1e40af !important;
+    -webkit-text-fill-color: #1e40af !important;
+  }
+
+  /* ── Section Headers ─────────────────────────────────────── */
+  .sectionHeader {
+    page-break-before: always;
+    break-before: page;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border-bottom-color: #1e40af !important;
+  }
+
+  .sectionNumber {
+    color: #1e40af !important;
+    -webkit-text-fill-color: #1e40af !important;
+    font-size: 9pt !important;
+  }
+
+  .sectionTitle {
+    font-size: 18pt !important;
+  }
+
+  .sectionDescription {
+    color: #475569 !important;
+    -webkit-text-fill-color: #475569 !important;
+  }
+
+  /* ── Topic Headers ───────────────────────────────────────── */
+  .topicHeader {
+    background: #f1f5f9 !important;
+    border-left-color: #1e40af !important;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* ── Word Cards ──────────────────────────────────────────── */
+  .wordCard {
+    border-color: #cbd5e1 !important;
+    background: white !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 8pt !important;
+    padding: 10pt !important;
+  }
+
+  .wordName {
+    color: #1e40af !important;
+    -webkit-text-fill-color: #1e40af !important;
+    font-size: 13pt !important;
+  }
+
+  .badgePos {
+    background: #ede9fe !important;
+    color: #6d28d9 !important;
+    -webkit-text-fill-color: #6d28d9 !important;
+  }
+
+  .badgeLevel {
+    background: #d1fae5 !important;
+    color: #065f46 !important;
+    -webkit-text-fill-color: #065f46 !important;
+  }
+
+  .defId {
+    color: #64748b !important;
+    -webkit-text-fill-color: #64748b !important;
+  }
+
+  .wordField {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  .fieldLabel {
+    color: #64748b !important;
+    -webkit-text-fill-color: #64748b !important;
+    font-size: 7pt !important;
+  }
+
+  .fieldValue {
+    font-size: 9pt !important;
+  }
+
+  .exampleBox {
+    background: #f8fafc !important;
+    border-left-color: #3b82f6 !important;
+  }
+
+  .exampleLabel {
+    font-size: 7pt !important;
+  }
+
+  .exampleText {
+    font-size: 9pt !important;
+  }
+
+  .tipBox {
+    background: #fffbeb !important;
+    border-color: #fbbf24 !important;
+  }
+
+  .tipLabel {
+    color: #b45309 !important;
+    -webkit-text-fill-color: #b45309 !important;
+  }
+
+  .mistakeBox {
+    background: #fef2f2 !important;
+    border-color: #fca5a5 !important;
+  }
+
+  .mistakeLabel {
+    color: #dc2626 !important;
+    -webkit-text-fill-color: #dc2626 !important;
+  }
+
+  /* ── Connector Cards ─────────────────────────────────────── */
+  .connectorGroup {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .connectorGroupHeader {
+    background: #f1f5f9 !important;
+  }
+
+  .connectorCard {
+    border-color: #cbd5e1 !important;
+    background: white !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .connectorWord {
+    color: #1e40af !important;
+    -webkit-text-fill-color: #1e40af !important;
+  }
+
+  .forWriting {
+    background: #dbeafe !important;
+    color: #1e40af !important;
+    -webkit-text-fill-color: #1e40af !important;
+  }
+
+  .forSpeaking {
+    background: #d1fae5 !important;
+    color: #065f46 !important;
+    -webkit-text-fill-color: #065f46 !important;
+  }
+
+  /* ── Formula Cards ───────────────────────────────────────── */
+  .formulaCard {
+    border-color: #cbd5e1 !important;
+    background: white !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .formulaTemplate {
+    background: #eff6ff !important;
+    border-color: #93c5fd !important;
+    font-size: 9pt !important;
+  }
+
+  /* ── Phrase Cards ────────────────────────────────────────── */
+  .phraseCard {
+    border-color: #cbd5e1 !important;
+    background: white !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .phraseText {
+    color: #1e40af !important;
+    -webkit-text-fill-color: #1e40af !important;
+  }
+
+  .phraseContext {
+    background: #f8fafc !important;
+    border-left-color: #3b82f6 !important;
+  }
+
+  .alternativeChip {
+    background: #ede9fe !important;
+    color: #6d28d9 !important;
+    -webkit-text-fill-color: #6d28d9 !important;
+  }
+
+  /* ── Plan Cards ──────────────────────────────────────────── */
+  .planDayCard {
+    border-color: #cbd5e1 !important;
+    background: white !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .planDayHeader {
+    border-bottom-color: #e2e8f0 !important;
+  }
+
+  .planTaskCheckbox {
+    border-color: #94a3b8 !important;
+  }
+
+  .planTaskType {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* ── Word Grid in Print ──────────────────────────────────── */
+  .wordGrid {
+    gap: 4pt !important;
+  }
+
+  /* ── Footer with page numbers ────────────────────────────── */
+  .printArea::after {
+    content: none;
+  }
+}
